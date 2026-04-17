@@ -1,77 +1,25 @@
-import { useState, useEffect, useRef, type RefObject } from "react";
+import { useState, type RefObject } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { navigationLinks, portfolioProfile } from "@/features/portfolio/content/portfolio-data";
+import { usePortfolioNavigation } from "@/features/portfolio/hooks/usePortfolioNavigation";
+import { useThemeMode } from "@/features/portfolio/hooks/useThemeMode";
 
 interface NavbarProps {
   scrollContainerRef?: RefObject<HTMLDivElement | null>;
 }
 
 export function PortfolioNavbar({ scrollContainerRef }: NavbarProps) {
-  const [dark, setDark] = useState(true);
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("#inicio");
-  const observerRef = useRef<IntersectionObserver | null>(null);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", dark);
-  }, [dark]);
-
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef?.current;
-
-    const onScroll = () => {
-      const scrollPosition = scrollContainer ? scrollContainer.scrollTop : window.scrollY;
-      setScrolled(scrollPosition > 20);
-    };
-
-    onScroll();
-
-    if (scrollContainer) {
-      scrollContainer.addEventListener("scroll", onScroll, { passive: true });
-      return () => scrollContainer.removeEventListener("scroll", onScroll);
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [scrollContainerRef]);
-
-  useEffect(() => {
-    const sectionIds = navigationLinks.map((l) => l.href.replace("#", ""));
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean) as HTMLElement[];
-
-    if (sections.length === 0) return;
-
-    const scrollRoot = scrollContainerRef?.current || null;
-
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((e) => e.isIntersecting);
-        if (visible.length > 0) {
-          const best = visible.reduce((a, b) =>
-            a.intersectionRatio > b.intersectionRatio ? a : b
-          );
-          setActiveSection(`#${best.target.id}`);
-        }
-      },
-      {
-        root: scrollRoot,
-        threshold: 0.4,
-      }
-    );
-
-    sections.forEach((s) => observerRef.current!.observe(s));
-
-    return () => observerRef.current?.disconnect();
-  }, [scrollContainerRef]);
+  const { isDark, toggleTheme } = useThemeMode();
+  const { activeSection, scrolled, scrollToSection } = usePortfolioNavigation({
+    links: navigationLinks,
+    scrollContainerRef,
+  });
 
   const handleClick = (href: string) => {
     setMobileOpen(false);
-    const el = document.querySelector(href);
-    el?.scrollIntoView({ behavior: "smooth" });
+    scrollToSection(href);
   };
 
   return (
@@ -110,19 +58,19 @@ export function PortfolioNavbar({ scrollContainerRef }: NavbarProps) {
             </button>
           ))}
           <button
-            onClick={() => setDark(!dark)}
+            onClick={toggleTheme}
             className="p-2 rounded-xl bg-muted/50 hover:bg-muted text-foreground transition-all duration-300"
           >
-            {dark ? <Sun size={18} /> : <Moon size={18} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
         </div>
 
         <div className="flex md:hidden items-center gap-3">
           <button
-            onClick={() => setDark(!dark)}
+            onClick={toggleTheme}
             className="p-2 rounded-xl bg-muted/50 text-foreground"
           >
-            {dark ? <Sun size={18} /> : <Moon size={18} />}
+            {isDark ? <Sun size={18} /> : <Moon size={18} />}
           </button>
           <button onClick={() => setMobileOpen(!mobileOpen)} className="p-2 text-foreground">
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
