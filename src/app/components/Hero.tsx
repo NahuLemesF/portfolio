@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
 import profilePhoto from "@/assets/linkedin_profile.png";
 import { heroActions, portfolioProfile } from "@/features/portfolio/content/portfolio-data";
+import { ActionLinks } from "@/features/portfolio/components/ui/ActionLinks";
 
 export function Hero() {
   return (
@@ -72,24 +73,9 @@ export function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.0 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex justify-center"
         >
-          {heroActions.map((action) => (
-            <a
-              key={action.label}
-              href={action.href}
-              target={action.external ? "_blank" : undefined}
-              rel={action.external ? "noopener noreferrer" : undefined}
-              className={
-                action.variant === "primary"
-                  ? "inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-2xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/25"
-                  : "inline-flex items-center gap-2 px-6 py-3 bg-card border border-border text-foreground rounded-2xl hover:border-primary/40 transition-all duration-300"
-              }
-            >
-              <action.icon size={18} />
-              {action.label}
-            </a>
-          ))}
+          <ActionLinks items={heroActions} variant="pill" className="items-center justify-center gap-4" />
         </motion.div>
 
         <motion.div

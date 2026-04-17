@@ -1,4 +1,7 @@
 import { motion } from "motion/react";
+import { SectionHeader } from "@/features/portfolio/components/ui/SectionHeader";
+import { SectionShell } from "@/features/portfolio/components/ui/SectionShell";
+import { SurfaceCard } from "@/features/portfolio/components/ui/SurfaceCard";
 
 const techs = [
   {
@@ -68,24 +71,14 @@ const techs = [
 
 export function TechStack() {
   return (
-    <section id="stack" className="h-full flex flex-col items-center justify-center py-6 px-6">
-      <div className="max-w-5xl mx-auto w-full">
+    <SectionShell id="stack" size="5xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
         >
-          <span
-            className="text-primary"
-            style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.8rem" }}
-          >
-            {"// stack"}
-          </span>
-          <h2 className="text-foreground mt-2" style={{ fontSize: "2rem", fontWeight: 700 }}>
-            Stack Tecnológico
-          </h2>
+          <SectionHeader eyebrow="// stack" title="Stack Tecnológico" className="mb-16" />
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
@@ -97,22 +90,22 @@ export function TechStack() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               whileHover={{ y: -4, scale: 1.02 }}
-              className="group p-6 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-300 text-center cursor-default"
             >
-              <div className="flex justify-center mb-3">{tech.icon}</div>
-              <h3 className="text-foreground" style={{ fontSize: "1rem", fontWeight: 600 }}>
-                {tech.name}
-              </h3>
-              <p
-                className="text-muted-foreground mt-1"
-                style={{ fontSize: "0.8rem", fontFamily: "JetBrains Mono, monospace" }}
-              >
-                {tech.sub}
-              </p>
+              <SurfaceCard className="group p-6 hover:border-primary/30 transition-all duration-300 text-center cursor-default">
+                <div className="flex justify-center mb-3">{tech.icon}</div>
+                <h3 className="text-foreground" style={{ fontSize: "1rem", fontWeight: 600 }}>
+                  {tech.name}
+                </h3>
+                <p
+                  className="text-muted-foreground mt-1"
+                  style={{ fontSize: "0.8rem", fontFamily: "JetBrains Mono, monospace" }}
+                >
+                  {tech.sub}
+                </p>
+              </SurfaceCard>
             </motion.div>
           ))}
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

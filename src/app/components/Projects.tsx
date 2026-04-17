@@ -3,6 +3,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { projectItems } from "@/features/portfolio/content/portfolio-data";
+import { SectionHeader } from "@/features/portfolio/components/ui/SectionHeader";
+import { SectionShell } from "@/features/portfolio/components/ui/SectionShell";
+import { SurfaceCard } from "@/features/portfolio/components/ui/SurfaceCard";
+import { TagList } from "@/features/portfolio/components/ui/TagList";
 
 export function Projects() {
   const [current, setCurrent] = useState(0);
@@ -11,24 +15,14 @@ export function Projects() {
   const next = () => setCurrent((c) => (c === projectItems.length - 1 ? 0 : c + 1));
 
   return (
-    <section id="proyectos" className="h-full flex flex-col items-center justify-center py-6 px-6">
-      <div className="max-w-6xl mx-auto w-full">
+    <SectionShell id="proyectos">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
         >
-          <span
-            className="text-primary"
-            style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.8rem" }}
-          >
-            {"// proyectos"}
-          </span>
-          <h2 className="text-foreground mt-2" style={{ fontSize: "2rem", fontWeight: 700 }}>
-            Trabajo Destacado
-          </h2>
+          <SectionHeader eyebrow="// proyectos" title="Trabajo Destacado" className="mb-16" />
         </motion.div>
 
         <div className="relative">
@@ -41,13 +35,13 @@ export function Projects() {
               transition={{ duration: 0.4 }}
               className="grid md:grid-cols-2 gap-8 items-center"
             >
-              <div className="rounded-2xl overflow-hidden border border-border bg-card">
+              <SurfaceCard className="overflow-hidden">
                 <ImageWithFallback
                   src={projectItems[current].image}
                   alt={projectItems[current].title}
                   className="w-full h-64 md:h-80 object-cover"
                 />
-              </div>
+              </SurfaceCard>
               <div className="space-y-5">
                 <h3 className="text-foreground" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
                   {projectItems[current].title}
@@ -55,17 +49,7 @@ export function Projects() {
                 <p className="text-muted-foreground" style={{ lineHeight: 1.7 }}>
                   {projectItems[current].description}
                 </p>
-                <div className="flex flex-wrap gap-2">
-                  {projectItems[current].tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
-                      style={{ fontSize: "0.75rem", fontFamily: "JetBrains Mono, monospace" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
+                <TagList tags={projectItems[current].tags} />
                 <a
                   href={projectItems[current].href}
                   target="_blank"
@@ -107,7 +91,6 @@ export function Projects() {
             </button>
           </div>
         </div>
-      </div>
-    </section>
+    </SectionShell>
   );
 }

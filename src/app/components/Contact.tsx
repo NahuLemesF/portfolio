@@ -2,6 +2,10 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Send } from "lucide-react";
 import { portfolioProfile, socialLinks } from "@/features/portfolio/content/portfolio-data";
+import { ActionLinks } from "@/features/portfolio/components/ui/ActionLinks";
+import { FormField } from "@/features/portfolio/components/ui/FormField";
+import { SectionHeader } from "@/features/portfolio/components/ui/SectionHeader";
+import { SectionShell } from "@/features/portfolio/components/ui/SectionShell";
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -16,141 +20,104 @@ export function Contact() {
   };
 
   return (
-    <section id="contacto" className="w-full px-6 py-4">
-      <div className="max-w-6xl mx-auto w-full">
-        <motion.div
+    <SectionShell id="contacto" className="w-full py-4" contentClassName="max-w-6xl">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
+        <SectionHeader
+          eyebrow="// contacto"
+          title="Hablemos"
+          align="left"
+          className="max-w-lg mb-6"
+        />
+      </motion.div>
+
+      <div className="grid lg:grid-cols-[minmax(0,0.82fr)_minmax(17rem,0.58fr)] gap-8 lg:gap-10 items-start">
+        <motion.form
+          onSubmit={handleSubmit}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-lg mb-6"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="max-w-lg p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border space-y-4"
         >
-          <span
-            className="text-primary"
-            style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "0.8rem" }}
+          <FormField label="Nombre">
+            <input
+              type="text"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+              required
+              className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground/50 focus:border-primary/50 focus:outline-none transition-colors"
+              placeholder="Tu nombre"
+            />
+          </FormField>
+          <FormField label="Email">
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm({ ...form, email: e.target.value })}
+              required
+              className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground/50 focus:border-primary/50 focus:outline-none transition-colors"
+              placeholder="tu@email.com"
+            />
+          </FormField>
+          <FormField label="Mensaje">
+            <textarea
+              value={form.message}
+              onChange={(e) => setForm({ ...form, message: e.target.value })}
+              required
+              rows={3}
+              className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground/50 focus:border-primary/50 focus:outline-none transition-colors resize-none"
+              placeholder="Cuéntame sobre tu proyecto..."
+            />
+          </FormField>
+          <button
+            type="submit"
+            className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
           >
-            {"// contacto"}
-          </span>
-          <h2 className="text-foreground mt-2" style={{ fontSize: "2rem", fontWeight: 700 }}>
-            Hablemos
-          </h2>
-        </motion.div>
+            <Send size={16} />
+            Enviar Mensaje
+          </button>
+        </motion.form>
 
-        <div className="grid lg:grid-cols-[minmax(0,0.82fr)_minmax(17rem,0.58fr)] gap-8 lg:gap-10 items-start">
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="max-w-lg p-6 rounded-2xl bg-card/60 backdrop-blur-xl border border-border space-y-4"
-          >
+        <motion.aside
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="w-full"
+        >
+          <div className="h-full lg:pl-8 lg:border-l border-border flex flex-col justify-center">
             <div>
-              <label
-                className="text-foreground mb-1.5 block"
-                style={{ fontSize: "0.85rem", fontWeight: 500 }}
+              <p
+                className="text-primary mb-2"
+                style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "1.1rem", fontWeight: 600 }}
               >
-                Nombre
-              </label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                required
-                className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground/50 focus:border-primary/50 focus:outline-none transition-colors"
-                placeholder="Tu nombre"
-              />
+                {portfolioProfile.brandMark}
+              </p>
+              <p className="text-foreground" style={{ fontSize: "1rem", fontWeight: 600 }}>
+                {portfolioProfile.role}
+              </p>
+              <p className="text-muted-foreground mt-3" style={{ fontSize: "0.9rem", lineHeight: 1.7 }}>
+                {portfolioProfile.shortBio}
+              </p>
             </div>
-            <div>
-              <label
-                className="text-foreground mb-1.5 block"
-                style={{ fontSize: "0.85rem", fontWeight: 500 }}
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                required
-                className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground/50 focus:border-primary/50 focus:outline-none transition-colors"
-                placeholder="tu@email.com"
-              />
-            </div>
-            <div>
-              <label
-                className="text-foreground mb-1.5 block"
-                style={{ fontSize: "0.85rem", fontWeight: 500 }}
-              >
-                Mensaje
-              </label>
-              <textarea
-                value={form.message}
-                onChange={(e) => setForm({ ...form, message: e.target.value })}
-                required
-                rows={3}
-                className="w-full px-4 py-3 rounded-xl bg-muted/50 border border-border text-foreground placeholder-muted-foreground/50 focus:border-primary/50 focus:outline-none transition-colors resize-none"
-                placeholder="Cuéntame sobre tu proyecto..."
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
-            >
-              <Send size={16} />
-              Enviar Mensaje
-            </button>
-          </motion.form>
 
-          <motion.aside
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="w-full"
-          >
-            <div className="h-full lg:pl-8 lg:border-l border-border flex flex-col justify-center">
-              <div>
-                <p
-                  className="text-primary mb-2"
-                  style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "1.1rem", fontWeight: 600 }}
-                >
-                  {portfolioProfile.brandMark}
-                </p>
-                <p className="text-foreground" style={{ fontSize: "1rem", fontWeight: 600 }}>
-                  {portfolioProfile.role}
-                </p>
-                <p className="text-muted-foreground mt-3" style={{ fontSize: "0.9rem", lineHeight: 1.7 }}>
-                  {portfolioProfile.shortBio}
-                </p>
-              </div>
-
-              <div className="mt-8">
-                <p
-                  className="text-muted-foreground mb-3"
-                  style={{ fontSize: "0.8rem", fontFamily: "JetBrains Mono, monospace" }}
-                >
-                  {"// redes"}
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  {socialLinks.map((s) => (
-                    <a
-                      key={s.label}
-                      href={s.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl border border-border text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300"
-                      aria-label={s.label}
-                    >
-                      <s.icon size={18} />
-                    </a>
-                  ))}
-                </div>
-              </div>
+            <div className="mt-8">
+              <p
+                className="text-muted-foreground mb-3"
+                style={{ fontSize: "0.8rem", fontFamily: "JetBrains Mono, monospace" }}
+              >
+                {"// redes"}
+              </p>
+              <ActionLinks items={socialLinks} variant="icon" />
             </div>
-          </motion.aside>
-        </div>
+          </div>
+        </motion.aside>
       </div>
-    </section>
+    </SectionShell>
   );
 }
