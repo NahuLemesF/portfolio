@@ -7,7 +7,7 @@ interface NavbarProps {
   scrollContainerRef?: RefObject<HTMLDivElement | null>;
 }
 
-export function Navbar({ scrollContainerRef }: NavbarProps) {
+export function PortfolioNavbar({ scrollContainerRef }: NavbarProps) {
   const [dark, setDark] = useState(true);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);

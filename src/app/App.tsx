@@ -1,13 +1,13 @@
 import { useRef, useEffect, useCallback } from "react";
-import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { AboutMe } from "./components/AboutMe";
-import { Projects } from "./components/Projects";
-import { TechStack } from "./components/TechStack";
-import { QASection } from "./components/QASection";
-import { Education } from "./components/Education";
-import { Contact } from "./components/Contact";
-import { Footer } from "./components/Footer";
+import { PortfolioNavbar } from "@/features/portfolio/components/layout/PortfolioNavbar";
+import { PortfolioFooter } from "@/features/portfolio/components/layout/PortfolioFooter";
+import { AboutSection } from "@/features/portfolio/components/sections/AboutSection";
+import { ContactSection } from "@/features/portfolio/components/sections/ContactSection";
+import { EducationSection } from "@/features/portfolio/components/sections/EducationSection";
+import { HeroSection } from "@/features/portfolio/components/sections/HeroSection";
+import { ProjectsSection } from "@/features/portfolio/components/sections/ProjectsSection";
+import { QASection } from "@/features/portfolio/components/sections/QASection";
+import { TechStackSection } from "@/features/portfolio/components/sections/TechStackSection";
 
 function easeInOutCubic(t: number): number {
   return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
@@ -98,33 +98,33 @@ export default function App() {
         scrollSnapType: "y mandatory",
       }}
     >
-      <Navbar scrollContainerRef={scrollContainerRef} />
+      <PortfolioNavbar scrollContainerRef={scrollContainerRef} />
 
       <div className="h-screen" data-snap style={{ scrollSnapAlign: "start" }}>
-        <Hero />
+        <HeroSection />
       </div>
 
       <div className="h-screen pt-[72px]" data-snap style={{ scrollSnapAlign: "start" }}>
-        <AboutMe />
+        <AboutSection />
       </div>
       <div className="h-screen pt-[72px]" data-snap style={{ scrollSnapAlign: "start" }}>
-        <Projects />
+        <ProjectsSection />
       </div>
       <div className="h-screen pt-[72px]" data-snap style={{ scrollSnapAlign: "start" }}>
-        <TechStack />
+        <TechStackSection />
       </div>
       <div className="h-screen pt-[72px]" data-snap style={{ scrollSnapAlign: "start" }}>
         <QASection />
       </div>
       <div className="h-screen pt-[72px]" data-snap style={{ scrollSnapAlign: "start" }}>
-        <Education />
+        <EducationSection />
       </div>
 
       <div className="h-screen pt-[72px] flex flex-col" data-snap style={{ scrollSnapAlign: "start" }}>
         <div className="flex-1 min-h-0 flex items-center">
-          <Contact />
+          <ContactSection />
         </div>
-        <Footer />
+        <PortfolioFooter />
       </div>
     </div>
   );

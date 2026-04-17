@@ -6,7 +6,7 @@ import { SectionShell } from "@/features/portfolio/components/ui/SectionShell";
 import { SurfaceCard } from "@/features/portfolio/components/ui/SurfaceCard";
 import { TagList } from "@/features/portfolio/components/ui/TagList";
 
-export function Education() {
+export function EducationSection() {
   return (
     <SectionShell id="experiencia" size="5xl" className="py-4 relative">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/[0.02] to-transparent pointer-events-none" />

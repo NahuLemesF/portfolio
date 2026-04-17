@@ -7,7 +7,7 @@ import { FormField } from "@/features/portfolio/components/ui/FormField";
 import { SectionHeader } from "@/features/portfolio/components/ui/SectionHeader";
 import { SectionShell } from "@/features/portfolio/components/ui/SectionShell";
 
-export function Contact() {
+export function ContactSection() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = (e: React.FormEvent) => {

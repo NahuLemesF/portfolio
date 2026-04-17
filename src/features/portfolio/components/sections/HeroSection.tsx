@@ -4,7 +4,7 @@ import profilePhoto from "@/assets/linkedin_profile.png";
 import { heroActions, portfolioProfile } from "@/features/portfolio/content/portfolio-data";
 import { ActionLinks } from "@/features/portfolio/components/ui/ActionLinks";
 
-export function Hero() {
+export function HeroSection() {
   return (
     <section
       id="inicio"

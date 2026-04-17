@@ -69,7 +69,7 @@ const techs = [
   },
 ];
 
-export function TechStack() {
+export function TechStackSection() {
   return (
     <SectionShell id="stack" size="5xl">
         <motion.div

@@ -4,7 +4,7 @@ import { SectionHeader } from "@/features/portfolio/components/ui/SectionHeader"
 import { SectionShell } from "@/features/portfolio/components/ui/SectionShell";
 import { SurfaceCard } from "@/features/portfolio/components/ui/SurfaceCard";
 
-export function AboutMe() {
+export function AboutSection() {
   return (
     <SectionShell id="sobre-mi" size="4xl">
       <motion.div

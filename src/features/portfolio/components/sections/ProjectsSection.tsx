@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { ImageWithFallback } from "@/features/portfolio/components/media/ImageWithFallback";
 import { projectItems } from "@/features/portfolio/content/portfolio-data";
 import { SectionHeader } from "@/features/portfolio/components/ui/SectionHeader";
 import { SectionShell } from "@/features/portfolio/components/ui/SectionShell";
 import { SurfaceCard } from "@/features/portfolio/components/ui/SurfaceCard";
 import { TagList } from "@/features/portfolio/components/ui/TagList";
 
-export function Projects() {
+export function ProjectsSection() {
   const [current, setCurrent] = useState(0);
 
   const prev = () => setCurrent((c) => (c === 0 ? projectItems.length - 1 : c - 1));
