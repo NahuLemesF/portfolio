@@ -2,51 +2,13 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
-
-const projects = [
-  {
-    id: 1,
-    title: "Dashboard Analytics",
-    description:
-      "Plataforma de analítica en tiempo real con gráficos interactivos, gestión de usuarios y reportes automatizados.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBzb2Z0d2FyZSUyMGRhc2hib2FyZCUyMGRhcmt8ZW58MXx8fHwxNzc2MjgwOTM2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React", "TypeScript", "Spring Boot", "PostgreSQL"],
-  },
-  {
-    id: 2,
-    title: "E-Commerce Platform",
-    description:
-      "Tienda en línea con carrito de compras, pasarela de pagos, panel de administración y API REST completa.",
-    image:
-      "https://images.unsplash.com/photo-1634084462412-b54873c0a56d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjB3ZWIlMjBhcHBsaWNhdGlvbiUyMG1vZGVybnxlbnwxfHx8fDE3NzYyODA5Mzd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Java", "React", "Docker", "MySQL"],
-  },
-  {
-    id: 3,
-    title: "Mobile Banking App",
-    description:
-      "Aplicación móvil con autenticación biométrica, transferencias en tiempo real y notificaciones push.",
-    image:
-      "https://images.unsplash.com/photo-1661246627162-feb0269e0c07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2JpbGUlMjBhcHAlMjBpbnRlcmZhY2UlMjBkZXNpZ258ZW58MXx8fHwxNzc2MjY1OTQ2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["React Native", "Node.js", "MongoDB"],
-  },
-  {
-    id: 4,
-    title: "API Microservices",
-    description:
-      "Arquitectura de microservicios con gateway, service discovery, circuit breaker y testing automatizado.",
-    image:
-      "https://images.unsplash.com/photo-1667372335936-3dc4ff716017?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxBUEklMjBtaWNyb3NlcnZpY2VzJTIwYXJjaGl0ZWN0dXJlJTIwZGlhZ3JhbXxlbnwxfHx8fDE3NzYyODA5Mzd8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    tags: ["Spring Boot", "Docker", "Karate DSL", "k6"],
-  },
-];
+import { projectItems } from "@/features/portfolio/content/portfolio-data";
 
 export function Projects() {
   const [current, setCurrent] = useState(0);
 
-  const prev = () => setCurrent((c) => (c === 0 ? projects.length - 1 : c - 1));
-  const next = () => setCurrent((c) => (c === projects.length - 1 ? 0 : c + 1));
+  const prev = () => setCurrent((c) => (c === 0 ? projectItems.length - 1 : c - 1));
+  const next = () => setCurrent((c) => (c === projectItems.length - 1 ? 0 : c + 1));
 
   return (
     <section id="proyectos" className="h-full flex flex-col items-center justify-center py-6 px-6">
@@ -81,20 +43,20 @@ export function Projects() {
             >
               <div className="rounded-2xl overflow-hidden border border-border bg-card">
                 <ImageWithFallback
-                  src={projects[current].image}
-                  alt={projects[current].title}
+                  src={projectItems[current].image}
+                  alt={projectItems[current].title}
                   className="w-full h-64 md:h-80 object-cover"
                 />
               </div>
               <div className="space-y-5">
                 <h3 className="text-foreground" style={{ fontSize: "1.5rem", fontWeight: 600 }}>
-                  {projects[current].title}
+                  {projectItems[current].title}
                 </h3>
                 <p className="text-muted-foreground" style={{ lineHeight: 1.7 }}>
-                  {projects[current].description}
+                  {projectItems[current].description}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {projects[current].tags.map((tag) => (
+                  {projectItems[current].tags.map((tag) => (
                     <span
                       key={tag}
                       className="px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20"
@@ -105,7 +67,7 @@ export function Projects() {
                   ))}
                 </div>
                 <a
-                  href="https://github.com"
+                  href={projectItems[current].href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/20"
@@ -126,7 +88,7 @@ export function Projects() {
               <ChevronLeft size={20} />
             </button>
             <div className="flex gap-2">
-              {projects.map((_, i) => (
+              {projectItems.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrent(i)}

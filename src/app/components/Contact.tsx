@@ -1,12 +1,7 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { Send, Github, Linkedin, Mail } from "lucide-react";
-
-const socials = [
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Mail, href: "mailto:nahulem@gmail.com", label: "Email" },
-];
+import { Send } from "lucide-react";
+import { portfolioProfile, socialLinks } from "@/features/portfolio/content/portfolio-data";
 
 export function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -17,7 +12,7 @@ export function Contact() {
     const body = encodeURIComponent(
       `Nombre: ${form.name}\nEmail: ${form.email}\n\nMensaje:\n${form.message}`
     );
-    window.location.href = `mailto:nahulem@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${portfolioProfile.email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -120,14 +115,13 @@ export function Contact() {
                   className="text-primary mb-2"
                   style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "1.1rem", fontWeight: 600 }}
                 >
-                  {`<Nahuel Lemes />`}
+                  {portfolioProfile.brandMark}
                 </p>
                 <p className="text-foreground" style={{ fontSize: "1rem", fontWeight: 600 }}>
-                  Fullstack Developer & QA Engineer
+                  {portfolioProfile.role}
                 </p>
                 <p className="text-muted-foreground mt-3" style={{ fontSize: "0.9rem", lineHeight: 1.7 }}>
-                  Diseño, desarrollo, pruebo y despliego software con foco en calidad y en una base
-                  técnica sólida.
+                  {portfolioProfile.shortBio}
                 </p>
               </div>
 
@@ -139,7 +133,7 @@ export function Contact() {
                   {"// redes"}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  {socials.map((s) => (
+                  {socialLinks.map((s) => (
                     <a
                       key={s.label}
                       href={s.href}

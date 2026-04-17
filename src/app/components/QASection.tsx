@@ -1,26 +1,9 @@
 import { motion } from "motion/react";
+import { Search, BoltIcon } from "lucide-react";
 import {
-  ShieldCheck,
-  Bug,
-  Zap,
-  FlaskConical,
-  TestTubeDiagonal,
-  Activity,
-  Search,
-  BoltIcon,
-} from "lucide-react";
-
-const manual = [
-  { icon: FlaskConical, name: "Postman", desc: "API Testing & Collections" },
-  { icon: TestTubeDiagonal, name: "Bruno", desc: "API Client & Testing" },
-  { icon: Bug, name: "Bug Tracking", desc: "Jira / Linear" },
-];
-
-const automation = [
-  { icon: ShieldCheck, name: "Karate DSL", desc: "API Test Automation" },
-  { icon: Zap, name: "Serenity BDD", desc: "BDD Automation Framework" },
-  { icon: Activity, name: "k6", desc: "Performance & Load Testing" },
-];
+  automationQaItems,
+  manualQaItems,
+} from "@/features/portfolio/content/portfolio-data";
 
 export function QASection() {
   return (
@@ -66,7 +49,7 @@ export function QASection() {
               Pruebas Manuales
             </h3>
             <div className="space-y-4">
-              {manual.map((item) => (
+              {manualQaItems.map((item) => (
                 <div
                   key={item.name}
                   className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors"
@@ -79,7 +62,7 @@ export function QASection() {
                       {item.name}
                     </p>
                     <p className="text-muted-foreground" style={{ fontSize: "0.8rem" }}>
-                      {item.desc}
+                      {item.description}
                     </p>
                   </div>
                 </div>
@@ -103,7 +86,7 @@ export function QASection() {
               Automatización
             </h3>
             <div className="space-y-4 relative">
-              {automation.map((item) => (
+              {automationQaItems.map((item) => (
                 <div
                   key={item.name}
                   className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors"
@@ -116,7 +99,7 @@ export function QASection() {
                       {item.name}
                     </p>
                     <p className="text-muted-foreground" style={{ fontSize: "0.8rem" }}>
-                      {item.desc}
+                      {item.description}
                     </p>
                   </div>
                 </div>

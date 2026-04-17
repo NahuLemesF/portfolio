@@ -1,44 +1,6 @@
 import { motion } from "motion/react";
-import { GraduationCap, BookOpen, Award, Calendar } from "lucide-react";
-
-const studies = [
-  {
-    title: "Ingeniería en Sistemas / Desarrollo de Software",
-    institution: "Universidad / Instituto",
-    period: "2020 - Presente",
-    description:
-      "Formación integral en ingeniería de software, algoritmos, estructuras de datos y arquitectura de sistemas.",
-    icon: GraduationCap,
-    tags: ["Algoritmos", "POO", "Bases de Datos"],
-  },
-  {
-    title: "Fullstack Java Developer",
-    institution: "Bootcamp / Certificación",
-    period: "2022",
-    description:
-      "Desarrollo backend con Java, Spring Boot, frontend con React y despliegue con Docker.",
-    icon: BookOpen,
-    tags: ["Java", "Spring Boot", "React"],
-  },
-  {
-    title: "QA Automation Engineer",
-    institution: "Certificación profesional",
-    period: "2023",
-    description:
-      "Automatización de pruebas con Karate DSL, Serenity BDD y pruebas de performance con k6.",
-    icon: Award,
-    tags: ["Karate DSL", "Serenity BDD", "k6"],
-  },
-  {
-    title: "React & TypeScript Avanzado",
-    institution: "Curso especializado",
-    period: "2024",
-    description:
-      "Patrones avanzados de React, TypeScript, testing de componentes y performance optimization.",
-    icon: BookOpen,
-    tags: ["React", "TypeScript", "Testing"],
-  },
-];
+import { Calendar } from "lucide-react";
+import { educationItems } from "@/features/portfolio/content/portfolio-data";
 
 export function Education() {
   return (
@@ -65,7 +27,7 @@ export function Education() {
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {studies.map((item, i) => (
+          {educationItems.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}

@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
-import { FileDown, Linkedin, Github, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import profilePhoto from "@/assets/linkedin_profile.png";
+import { heroActions, portfolioProfile } from "@/features/portfolio/content/portfolio-data";
 
 export function Hero() {
   return (
@@ -40,7 +41,7 @@ export function Hero() {
             fontFamily: "Inter, sans-serif",
           }}
         >
-          Nahuel Lemes
+          {portfolioProfile.name}
         </motion.h1>
 
         <motion.p
@@ -54,7 +55,7 @@ export function Hero() {
             fontFamily: "JetBrains Mono, monospace",
           }}
         >
-          Fullstack Full Cycle Developer & QA Engineer
+          {portfolioProfile.heroRole}
         </motion.p>
 
         <motion.p
@@ -64,8 +65,7 @@ export function Hero() {
           className="text-muted-foreground max-w-xl mx-auto mb-10"
           style={{ fontSize: "1.05rem", lineHeight: 1.7 }}
         >
-          Diseño, desarrollo, pruebo y despliego. Domino el ciclo de vida completo
-          del software con Java, React y automatización de calidad.
+          {portfolioProfile.heroDescription}
         </motion.p>
 
         <motion.div
@@ -74,31 +74,22 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 1.0 }}
           className="flex flex-wrap items-center justify-center gap-4"
         >
-          <a
-            href="https://linkedin.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-2xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/25"
-          >
-            <Linkedin size={18} />
-            LinkedIn
-          </a>
-          <a
-            href="https://github.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-2xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/25"
-          >
-            <Github size={18} />
-            GitHub
-          </a>
-          <a
-            href="#"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-card border border-border text-foreground rounded-2xl hover:border-primary/40 transition-all duration-300"
-          >
-            <FileDown size={18} />
-            Descargar CV
-          </a>
+          {heroActions.map((action) => (
+            <a
+              key={action.label}
+              href={action.href}
+              target={action.external ? "_blank" : undefined}
+              rel={action.external ? "noopener noreferrer" : undefined}
+              className={
+                action.variant === "primary"
+                  ? "inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-2xl hover:opacity-90 transition-all duration-300 shadow-lg shadow-primary/25"
+                  : "inline-flex items-center gap-2 px-6 py-3 bg-card border border-border text-foreground rounded-2xl hover:border-primary/40 transition-all duration-300"
+              }
+            >
+              <action.icon size={18} />
+              {action.label}
+            </a>
+          ))}
         </motion.div>
 
         <motion.div

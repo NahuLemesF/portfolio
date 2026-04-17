@@ -1,16 +1,7 @@
 import { useState, useEffect, useRef, type RefObject } from "react";
 import { Moon, Sun, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-
-const links = [
-  { href: "#inicio", label: "Inicio" },
-  { href: "#sobre-mi", label: "Sobre Mí" },
-  { href: "#proyectos", label: "Proyectos" },
-  { href: "#stack", label: "Stack" },
-  { href: "#qa", label: "QA" },
-  { href: "#experiencia", label: "Formación" },
-  { href: "#contacto", label: "Contacto" },
-];
+import { navigationLinks, portfolioProfile } from "@/features/portfolio/content/portfolio-data";
 
 interface NavbarProps {
   scrollContainerRef?: RefObject<HTMLDivElement | null>;
@@ -47,7 +38,7 @@ export function Navbar({ scrollContainerRef }: NavbarProps) {
   }, [scrollContainerRef]);
 
   useEffect(() => {
-    const sectionIds = links.map((l) => l.href.replace("#", ""));
+    const sectionIds = navigationLinks.map((l) => l.href.replace("#", ""));
     const sections = sectionIds
       .map((id) => document.getElementById(id))
       .filter(Boolean) as HTMLElement[];
@@ -100,11 +91,11 @@ export function Navbar({ scrollContainerRef }: NavbarProps) {
           className="text-primary tracking-tight"
           style={{ fontFamily: "JetBrains Mono, monospace", fontSize: "1.1rem", fontWeight: 600 }}
         >
-          {`<Nahuel Lemes />`}
+          {portfolioProfile.brandMark}
         </button>
 
         <div className="hidden md:flex items-center gap-8">
-          {links.map((l) => (
+          {navigationLinks.map((l) => (
             <button
               key={l.href}
               onClick={() => handleClick(l.href)}
@@ -148,7 +139,7 @@ export function Navbar({ scrollContainerRef }: NavbarProps) {
             className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-4">
-              {links.map((l) => (
+              {navigationLinks.map((l) => (
                 <button
                   key={l.href}
                   onClick={() => handleClick(l.href)}

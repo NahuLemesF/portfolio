@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Code, ShieldCheck, Coffee } from "lucide-react";
+import { aboutHighlights, portfolioProfile } from "@/features/portfolio/content/portfolio-data";
 
 export function AboutMe() {
   return (
@@ -31,26 +31,16 @@ export function AboutMe() {
           className="p-2 md:p-0"
         >
           <p className="text-foreground mb-5" style={{ lineHeight: 1.8, fontSize: "1.05rem" }}>
-            Soy <strong>Nahuel Lemes</strong>, desarrollador Fullstack y QA Engineer apasionado por
-            construir software de calidad de principio a fin. Me especializo en el ciclo de vida
-            completo del desarrollo: desde el diseño de arquitecturas backend con Java y Spring Boot,
-            hasta interfaces modernas con React y TypeScript, pasando por la automatización de pruebas
-            que garantizan que todo funcione como debe.
+            Soy <strong>{portfolioProfile.name}</strong>,{" "}
+            {portfolioProfile.aboutParagraphs[0].replace(`Soy ${portfolioProfile.name}, `, "")}
           </p>
 
           <p className="text-muted-foreground mb-8" style={{ lineHeight: 1.8 }}>
-            Creo firmemente en que un buen desarrollador no solo escribe código, sino que entiende
-            el problema, diseña la solución y valida el resultado. Esa filosofía "full cycle" es lo
-            que define mi forma de trabajar. Cuando no estoy programando, probablemente me encuentres
-            explorando nuevas tecnologías o contribuyendo a proyectos open source.
+            {portfolioProfile.aboutParagraphs[1]}
           </p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[
-              { icon: Code, label: "Full Cycle Dev", desc: "Diseño → Deploy" },
-              { icon: ShieldCheck, label: "QA Engineer", desc: "Automation & Testing" },
-              { icon: Coffee, label: "Aprendizaje", desc: "Mejora continua" },
-            ].map((item) => (
+            {aboutHighlights.map((item) => (
               <div
                 key={item.label}
                 className="p-4 rounded-xl bg-muted/30 border border-border/50 text-center"
@@ -60,7 +50,7 @@ export function AboutMe() {
                   {item.label}
                 </p>
                 <p className="text-muted-foreground" style={{ fontSize: "0.75rem" }}>
-                  {item.desc}
+                  {item.description}
                 </p>
               </div>
             ))}
