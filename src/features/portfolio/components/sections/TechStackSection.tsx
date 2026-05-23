@@ -69,6 +69,15 @@ const techs = [
   },
 ];
 
+const techGlows: Record<string, string> = {
+  "Java": "hover:border-red-500/40 hover:shadow-red-500/10 dark:hover:shadow-red-500/5",
+  "React": "hover:border-sky-400/40 hover:shadow-sky-400/10 dark:hover:shadow-sky-400/5",
+  "Node.js": "hover:border-emerald-400/40 hover:shadow-emerald-400/10 dark:hover:shadow-emerald-400/5",
+  "PostgreSQL": "hover:border-blue-500/40 hover:shadow-blue-500/10 dark:hover:shadow-blue-500/5",
+  "Docker": "hover:border-cyan-400/40 hover:shadow-cyan-400/10 dark:hover:shadow-cyan-400/5",
+  "Git": "hover:border-orange-500/40 hover:shadow-orange-500/10 dark:hover:shadow-orange-500/5",
+};
+
 export function TechStackSection() {
   return (
     <SectionShell id="stack" size="5xl">
@@ -82,29 +91,34 @@ export function TechStackSection() {
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-5">
-          {techs.map((tech, i) => (
-            <motion.div
-              key={tech.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              whileHover={{ y: -4, scale: 1.02 }}
-            >
-              <SurfaceCard className="group p-6 hover:border-primary/30 transition-all duration-300 text-center cursor-default">
-                <div className="flex justify-center mb-3">{tech.icon}</div>
-                <h3 className="text-foreground" style={{ fontSize: "1rem", fontWeight: 600 }}>
-                  {tech.name}
-                </h3>
-                <p
-                  className="text-muted-foreground mt-1"
-                  style={{ fontSize: "0.8rem", fontFamily: "JetBrains Mono, monospace" }}
-                >
-                  {tech.sub}
-                </p>
-              </SurfaceCard>
-            </motion.div>
-          ))}
+          {techs.map((tech, i) => {
+            const glowClass = techGlows[tech.name] || "hover:border-primary/30";
+            return (
+              <motion.div
+                key={tech.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -6, scale: 1.02 }}
+              >
+                <SurfaceCard className={`group p-6 text-center cursor-default hover:shadow-xl transition-all duration-300 ${glowClass}`}>
+                  <div className="flex justify-center mb-3.5 transition-transform duration-300 group-hover:scale-115">
+                    {tech.icon}
+                  </div>
+                  <h3 className="text-foreground" style={{ fontSize: "1rem", fontWeight: 600 }}>
+                    {tech.name}
+                  </h3>
+                  <p
+                    className="text-muted-foreground mt-1"
+                    style={{ fontSize: "0.8rem", fontFamily: "JetBrains Mono, monospace" }}
+                  >
+                    {tech.sub}
+                  </p>
+                </SurfaceCard>
+              </motion.div>
+            );
+          })}
         </div>
     </SectionShell>
   );

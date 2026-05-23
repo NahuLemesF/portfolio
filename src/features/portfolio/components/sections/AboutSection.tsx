@@ -32,20 +32,28 @@ export function AboutSection() {
           {portfolioProfile.aboutParagraphs[1]}
         </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {aboutHighlights.map((item) => (
-            <SurfaceCard
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+          {aboutHighlights.map((item, i) => (
+            <motion.div
               key={item.label}
-              className="p-4 bg-muted/30 border-border/50 text-center"
+              whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 + i * 0.08 }}
             >
-              <item.icon size={20} className="mx-auto text-primary mb-2" />
-              <p className="text-foreground" style={{ fontSize: "0.85rem", fontWeight: 500 }}>
-                {item.label}
-              </p>
-              <p className="text-muted-foreground" style={{ fontSize: "0.75rem" }}>
-                {item.description}
-              </p>
-            </SurfaceCard>
+              <SurfaceCard className="p-5 bg-card border-border/40 text-center hover:border-primary/20 hover:shadow-lg transition-all duration-300">
+                <div className="w-11 h-11 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-3.5 transition-transform duration-300 group-hover:scale-110">
+                  <item.icon size={20} />
+                </div>
+                <p className="text-foreground mb-1" style={{ fontSize: "0.9rem", fontWeight: 600 }}>
+                  {item.label}
+                </p>
+                <p className="text-muted-foreground" style={{ fontSize: "0.8rem", lineHeight: 1.4 }}>
+                  {item.description}
+                </p>
+              </SurfaceCard>
+            </motion.div>
           ))}
         </div>
       </motion.div>

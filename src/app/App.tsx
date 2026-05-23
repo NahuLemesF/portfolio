@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Toaster } from "sonner";
 import { PortfolioNavbar } from "@/features/portfolio/components/layout/PortfolioNavbar";
 import { PortfolioFooter } from "@/features/portfolio/components/layout/PortfolioFooter";
 import { SnapScreen } from "@/features/portfolio/components/layout/SnapScreen";
@@ -53,6 +54,8 @@ export default function App() {
         </div>
         <PortfolioFooter />
       </SnapScreen>
+
+      <Toaster position="bottom-right" richColors toastOptions={{ style: { borderRadius: "12px" } }} />
     </div>
   );
 }

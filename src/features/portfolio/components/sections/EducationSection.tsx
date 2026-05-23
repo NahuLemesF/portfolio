@@ -21,48 +21,53 @@ export function EducationSection() {
           <SectionHeader eyebrow="// formación" title="Experiencia Académica" className="mb-10" />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {educationItems.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              whileHover={{ y: -4 }}
             >
-              <SurfaceCard className="p-5 hover:border-primary/20 transition-all duration-300">
-                <div className="flex items-center gap-3 mb-3">
-                  <div className="p-2 rounded-xl bg-primary/10 text-primary">
-                    <item.icon size={16} />
+              <SurfaceCard className="group p-6 bg-card/65 backdrop-blur-xl border-border/50 hover:border-primary/25 hover:shadow-xl transition-all duration-300 flex flex-col justify-between h-full">
+                <div>
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2.5 rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110 shrink-0">
+                        <item.icon size={18} />
+                      </div>
+                      <div className="min-w-0">
+                        <h3 className="text-foreground font-semibold" style={{ fontSize: "1rem", lineHeight: 1.35 }}>
+                          {item.title}
+                        </h3>
+                      </div>
+                    </div>
+                    <div
+                      className="flex items-center gap-1.5 text-muted-foreground shrink-0 bg-muted/40 px-2.5 py-1 rounded-lg"
+                      style={{ fontSize: "0.75rem", fontWeight: 500 }}
+                    >
+                      <Calendar size={12} className="text-primary/70" />
+                      {item.period}
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-foreground truncate" style={{ fontSize: "0.95rem", fontWeight: 600 }}>
-                      {item.title}
-                    </h3>
-                  </div>
-                  <div
-                    className="flex items-center gap-1.5 text-muted-foreground shrink-0"
-                    style={{ fontSize: "0.75rem" }}
-                  >
-                    <Calendar size={12} />
-                    {item.period}
-                  </div>
-                </div>
 
-                <p
-                  className="text-primary/70 mb-2"
-                  style={{ fontSize: "0.8rem", fontFamily: "JetBrains Mono, monospace" }}
-                >
-                  {item.institution}
-                </p>
-                <p className="text-muted-foreground mb-3" style={{ fontSize: "0.85rem", lineHeight: 1.6 }}>
-                  {item.description}
-                </p>
+                  <p
+                    className="text-primary/90 mb-3"
+                    style={{ fontSize: "0.825rem", fontFamily: "JetBrains Mono, monospace", fontWeight: 500 }}
+                  >
+                    {item.institution}
+                  </p>
+                  <p className="text-muted-foreground mb-5" style={{ fontSize: "0.875rem", lineHeight: 1.65 }}>
+                    {item.description}
+                  </p>
+                </div>
 
                 <TagList
                   tags={item.tags}
-                  className="gap-1.5"
-                  tagClassName="px-2 py-0.5 border-primary/15"
+                  className="gap-2"
+                  tagClassName="px-2.5 py-0.5 bg-primary/5 border-primary/15"
                 />
               </SurfaceCard>
             </motion.div>

@@ -30,33 +30,34 @@ export function QASection() {
 
         <div className="grid md:grid-cols-2 gap-8">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
+            initial={{ opacity: 0, x: -25 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <SurfaceCard className="p-8">
+            <SurfaceCard className="p-8 bg-card/65 backdrop-blur-xl border-border/50 hover:border-primary/25 hover:shadow-xl transition-all duration-500 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
               <h3
-                className="text-foreground mb-6 flex items-center gap-2"
-                style={{ fontSize: "1.1rem", fontWeight: 600 }}
+                className="text-foreground mb-6 flex items-center gap-2.5 relative z-10"
+                style={{ fontSize: "1.15rem", fontWeight: 650 }}
               >
-                <Search size={18} className="text-primary" />
+                <Search size={20} className="text-primary" />
                 Pruebas Manuales
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-4 relative z-10">
                 {manualQaItems.map((item) => (
                   <div
                     key={item.name}
-                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors"
+                    className="flex items-center gap-4 p-3.5 rounded-xl hover:bg-primary/5 hover:translate-x-1.5 transition-all duration-350 group cursor-default"
                   >
-                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                       <item.icon size={20} />
                     </div>
                     <div>
-                      <p className="text-foreground" style={{ fontWeight: 500 }}>
+                      <p className="text-foreground font-medium transition-colors group-hover:text-primary" style={{ fontSize: "0.925rem" }}>
                         {item.name}
                       </p>
-                      <p className="text-muted-foreground" style={{ fontSize: "0.8rem" }}>
+                      <p className="text-muted-foreground mt-0.5" style={{ fontSize: "0.8rem", lineHeight: 1.4 }}>
                         {item.description}
                       </p>
                     </div>
@@ -67,34 +68,34 @@ export function QASection() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 25 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <SurfaceCard className="p-8 border-primary/20 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl" />
+            <SurfaceCard className="p-8 bg-card/65 backdrop-blur-xl border-border/50 hover:border-primary/25 hover:shadow-xl transition-all duration-500 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
               <h3
-                className="text-foreground mb-6 relative flex items-center gap-2"
-                style={{ fontSize: "1.1rem", fontWeight: 600 }}
+                className="text-foreground mb-6 relative z-10 flex items-center gap-2.5"
+                style={{ fontSize: "1.15rem", fontWeight: 655 }}
               >
-                <BoltIcon size={18} className="text-primary" />
+                <BoltIcon size={20} className="text-primary" />
                 Automatización
               </h3>
-              <div className="space-y-4 relative">
+              <div className="space-y-4 relative z-10">
                 {automationQaItems.map((item) => (
                   <div
                     key={item.name}
-                    className="flex items-center gap-4 p-3 rounded-xl hover:bg-muted/50 transition-colors"
+                    className="flex items-center gap-4 p-3.5 rounded-xl hover:bg-primary/5 hover:translate-x-1.5 transition-all duration-350 group cursor-default"
                   >
-                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary">
+                    <div className="p-2.5 rounded-xl bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
                       <item.icon size={20} />
                     </div>
                     <div>
-                      <p className="text-foreground" style={{ fontWeight: 500 }}>
+                      <p className="text-foreground font-medium transition-colors group-hover:text-primary" style={{ fontSize: "0.925rem" }}>
                         {item.name}
                       </p>
-                      <p className="text-muted-foreground" style={{ fontSize: "0.8rem" }}>
+                      <p className="text-muted-foreground mt-0.5" style={{ fontSize: "0.8rem", lineHeight: 1.4 }}>
                         {item.description}
                       </p>
                     </div>

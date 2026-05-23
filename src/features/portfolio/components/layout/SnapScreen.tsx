@@ -15,8 +15,11 @@ export function SnapScreen({
   return (
     <div
       data-snap
-      className={cn("h-screen", padded && "pt-[72px]", className)}
-      style={{ scrollSnapAlign: "start" }}
+      className={cn("h-screen w-full flex-shrink-0", padded && "pt-[72px]", className)}
+      style={{ 
+        scrollSnapAlign: "start",
+        scrollSnapStop: "always"
+      }}
     >
       {children}
     </div>
